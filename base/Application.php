@@ -4,6 +4,7 @@ namespace Base;
 class Application
 {
     private $route;
+    private $twig;
 
     public function __construct(Route $route)
     {
@@ -39,4 +40,13 @@ class Application
             echo 'Page not found';
         }
     }
+}
+
+public function renderTwig() {
+    if (!$this->twig) {
+        $loader = new \Twig\Loader\FilesystemLoader($this->templatePath);
+        $this->twig = new \Twig\Environment($loader]);
+    }
+
+    return $this->twig->render($tpl, $data);
 }
